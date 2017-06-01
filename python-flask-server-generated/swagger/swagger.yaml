@@ -1,0 +1,462 @@
+---
+swagger: "2.0"
+info:
+  description: "API for environmental exposure models for NIH Data Translator program"
+  version: "1.0.0"
+  title: "Environmental Exposures API"
+  termsOfService: "None Available"
+  contact:
+    name: "Michael J. Stealey"
+    url: "http://renci.org"
+    email: "stealey@renci.org"
+host: "exposures.renci.org"
+basePath: "/v1"
+schemes:
+- "https"
+- "http"
+paths:
+  /exposures:
+    get:
+      tags:
+      - "default"
+      summary: "Get list of exposure types"
+      description: "Returns a list of all available exposure types"
+      operationId: "controllers.default_controller.exposures_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Exposure types"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/exposure_type"
+        404:
+          description: "No exposure types found"
+  /exposures/{exposure_type}/values:
+    get:
+      tags:
+      - "default"
+      summary: "Get exposure value for a given environmental factor at exposure location(s)"
+      description: "Retrieve the computed exposure value(s) for a given environmental\
+        \ exposure factor, time period, and location(s)."
+      operationId: "controllers.default_controller.exposures_exposure_type_values_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "exposure_type"
+        in: "path"
+        description: "The name of the exposure type (currently limited to pm25, o3,\
+          \ haz_waste, crime, res_den, poverty, ses)."
+        required: true
+        type: "string"
+        default: "pm25"
+      - name: "start_date"
+        in: "query"
+        description: "The starting date to obtain exposures for (example 2010-01-06\
+          \ is January 6th 2010)."
+        required: true
+        type: "string"
+        default: "2010-01-06"
+        format: "date"
+      - name: "end_date"
+        in: "query"
+        description: "The ending date to obtain exposures for (example 2010-01-15\
+          \ is January 15th 2010)."
+        required: true
+        type: "string"
+        default: "2010-01-15"
+        format: "date"
+      - name: "exposure_point"
+        in: "query"
+        description: "A description of the location(s) to retrieve the exposure for.\
+          \ Locaton may be a single geocoordinate (example '35.9131996,-79.0558445')\
+          \ or a semicomma separated list of geocoord:dayhours giving the start and\
+          \ ending hours on specific days of the week at that location (example '35.9131996,-79.0558445,Sa0813;35.7795897,-78.6381787,other')\
+          \ indicates Saturdays from 8am to 1pm is at one location and all other times\
+          \ are at another location. Hours should be in 24 hours time using 2 digits,\
+          \ days of the week should be the first two characters of the day.If the\
+          \ day of the week does not appear then the time periods apply to all days\
+          \ (example '35.9131996,-79.0558445,0614,35.7795897,-78.6381787,1424') gives\
+          \ two time periods for all days. If hours do not appear then the time period\
+          \ applies to all hours of the day (example '35.9131996,-79.0558445,Sa,35.7795897,-78.6381787,Su')."
+        required: true
+        type: "string"
+        default: "35.9131996,-79.0558445"
+      - name: "temporal_resolution"
+        in: "query"
+        description: "The temporal resolution to use for results, should be one of\
+          \ 'hour' or 'day'. Default is 'day'"
+        required: false
+        type: "string"
+        default: "day"
+      - name: "statistical_type"
+        in: "query"
+        description: "The statistic to use for results, should be one of 'max', 'mean',\
+          \ or 'median'. Default is 'max'"
+        required: false
+        type: "string"
+        default: "max"
+      - name: "radius"
+        in: "query"
+        description: "radius in meters to search within for exposure point when a\
+          \ coordinate is provided. Range from 0 to 500"
+        required: false
+        type: "string"
+        default: "0"
+      - name: "page"
+        in: "query"
+        description: "Page number. Return up to 100 items per page"
+        required: false
+        type: "string"
+        default: "1"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/exposure"
+        400:
+          description: "Invalid exposure parameter"
+        404:
+          description: "Values not found for exposure type"
+  /exposures/{exposure_type}/scores:
+    get:
+      tags:
+      - "default"
+      summary: "Get exposure score for a given environmental factor at exposure location(s)"
+      description: "Retrieve the computed exposure score(s) for a given environmental\
+        \ exposure factor, time period, and location(s)."
+      operationId: "controllers.default_controller.exposures_exposure_type_scores_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "exposure_type"
+        in: "path"
+        description: "The name of the exposure type (currently limited to pm25, o3,\
+          \ haz_waste, crime, res_den, poverty, ses)."
+        required: true
+        type: "string"
+        default: "pm25"
+      - name: "start_date"
+        in: "query"
+        description: "The starting date to obtain exposures for (example 2010-01-06\
+          \ is January 6th 2010)."
+        required: true
+        type: "string"
+        default: "2010-01-06"
+        format: "date"
+      - name: "end_date"
+        in: "query"
+        description: "The ending date to obtain exposures for (example 2010-01-15\
+          \ is January 15th 2010)."
+        required: true
+        type: "string"
+        default: "2010-01-15"
+        format: "date"
+      - name: "exposure_point"
+        in: "query"
+        description: "A description of the location(s) to retrieve the exposure for.\
+          \ Locaton may be a single geocoordinate (example '35.9131996,-79.0558445')\
+          \ or a semicomma separated list of geocoord:dayhours giving the start and\
+          \ ending hours on specific days of the week at that location (example '35.9131996,-79.0558445,Sa0813;35.7795897,-78.6381787,other')\
+          \ indicates Saturdays from 8am to 1pm is at one location and all other times\
+          \ are at another location. Hours should be in 24 hours time using 2 digits,\
+          \ days of the week should be the first two characters of the day.If the\
+          \ day of the week does not appear then the time periods apply to all days\
+          \ (example '35.9131996,-79.0558445,0614,35.7795897,-78.6381787,1424') gives\
+          \ two time periods for all days. If hours do not appear then the time period\
+          \ applies to all hours of the day (example '35.9131996,-79.0558445,Sa,35.7795897,-78.6381787,Su')."
+        required: true
+        type: "string"
+        default: "35.9131996,-79.0558445"
+      - name: "temporal_resolution"
+        in: "query"
+        description: "The temporal resolution to use for results, should be one of\
+          \ 'hour' or 'day'. Default is 'day'"
+        required: false
+        type: "string"
+        default: "day"
+      - name: "score_type"
+        in: "query"
+        description: "The exposure score type to return. The accepted values vary\
+          \ by exposure type. For pm25 values are '7dayrisk', '14dayrisk'. Default\
+          \ is '7dayrisk' (NOT COMPLETE)."
+        required: false
+        type: "string"
+        default: "7dayrisk"
+      - name: "radius"
+        in: "query"
+        description: "radius in meters to search within for exposure point when a\
+          \ coordinate is provided. Range from 0 to 500"
+        required: false
+        type: "string"
+        default: "0"
+      - name: "page"
+        in: "query"
+        description: "Page number. Return up to 100 items per page"
+        required: false
+        type: "string"
+        default: "1"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/exposure"
+        400:
+          description: "Invalid exposure parameters"
+        404:
+          description: "Scores not found for exposure type"
+  /exposures/{exposure_type}/coordinates:
+    get:
+      tags:
+      - "default"
+      summary: "Get exposure location(s) as latitude, longitude coordinates"
+      description: "Returns paginated list of available latitude, longitude coordinates\
+        \ for given exposure_type. Optionally the user can provide a latitude, longitude\
+        \ coordinate with a radius in meters to discover if an exposure location is\
+        \ within the requested range."
+      operationId: "controllers.default_controller.exposures_exposure_type_coordinates_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "exposure_type"
+        in: "path"
+        description: "The name of the exposure type (currently limited to pm25, o3,\
+          \ haz_waste, crime, res_den, poverty, ses)."
+        required: true
+        type: "string"
+        default: "pm25"
+      - name: "latitude"
+        in: "query"
+        description: "Search coordinates that match or are like 'latitude'"
+        required: false
+        type: "string"
+      - name: "longitude"
+        in: "query"
+        description: "Search coordinates that match or are like 'longitude'"
+        required: false
+        type: "string"
+      - name: "radius"
+        in: "query"
+        description: "radius in meters to search within for exposure point when a\
+          \ coordinate is provided. Range from 0 to 500"
+        required: false
+        type: "string"
+        default: "0"
+      - name: "page"
+        in: "query"
+        description: "Page number. Return up to 100 items per page"
+        required: false
+        type: "string"
+        default: "1"
+      responses:
+        200:
+          description: "Exposure points"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/coordinate"
+        404:
+          description: "No coordinates found for exposure type"
+  /exposures/{exposure_type}/dates:
+    get:
+      tags:
+      - "default"
+      summary: "Get exposure start date and end date range for exposure type"
+      description: "Returns exposure start date and end date range for given exposure\
+        \ type"
+      operationId: "controllers.default_controller.exposures_exposure_type_dates_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "exposure_type"
+        in: "path"
+        description: "The name of the exposure type (currently limited to pm25, o3,\
+          \ haz_waste, crime, res_den, poverty, ses)."
+        required: true
+        type: "string"
+        default: "pm25"
+      responses:
+        200:
+          description: "Date range"
+          schema:
+            $ref: "#/definitions/date_range"
+        404:
+          description: "No date range found for exposure type"
+definitions:
+  exposure:
+    type: "object"
+    required:
+    - "exposure_type"
+    properties:
+      exposure_type:
+        type: "string"
+        example: "pm25"
+      start_time:
+        type: "string"
+        format: "date-time"
+        example: "2010-01-15T00:00:00Z"
+      end_time:
+        type: "string"
+        format: "date-time"
+        example: "2010-01-15T23:00:00Z"
+      value:
+        type: "string"
+        example: "5.0 |OR| 17.7199974060059"
+      units:
+        type: "string"
+        example: "7dayrisk |OR| ugm3"
+      latitude:
+        type: "string"
+        format: "float"
+        example: "35.7795897"
+      longitude:
+        type: "string"
+        format: "float"
+        example: "-78.6381787"
+  exposure_type:
+    type: "object"
+    properties:
+      exposure_type:
+        type: "string"
+        example: "pm25"
+      description:
+        type: "string"
+        example: "exposure to airborne particulates: scores range from 1 (low < 4.0\
+          \ μg/m3) to 5 (high > 11.37 μg/m3); values returned in μg/m3 abbreviated\
+          \ as ugm3"
+      units:
+        type: "string"
+        example: "ugm3"
+      has_values:
+        type: "boolean"
+        example: true
+      has_scores:
+        type: "boolean"
+        example: true
+      schema_version:
+        type: "string"
+        example: "1.0.0"
+  coordinate:
+    type: "object"
+    properties:
+      latitude:
+        type: "string"
+        format: "float"
+        example: "35.7795897"
+      longitude:
+        type: "string"
+        format: "float"
+        example: "-78.6381787"
+  date_range:
+    type: "object"
+    properties:
+      start_date:
+        type: "string"
+        format: "date-time"
+        example: "2010-01-01T00:00:00Z"
+      end_date:
+        type: "string"
+        format: "date-time"
+        example: "2010-01-31T00:00:00Z"
+parameters:
+  exposure_type:
+    name: "exposure_type"
+    in: "path"
+    description: "The name of the exposure type (currently limited to pm25, o3, haz_waste,\
+      \ crime, res_den, poverty, ses)."
+    required: true
+    type: "string"
+    default: "pm25"
+  start_date:
+    name: "start_date"
+    in: "query"
+    description: "The starting date to obtain exposures for (example 2010-01-06 is\
+      \ January 6th 2010)."
+    required: true
+    type: "string"
+    default: "2010-01-06"
+    format: "date"
+  end_date:
+    name: "end_date"
+    in: "query"
+    description: "The ending date to obtain exposures for (example 2010-01-15 is January\
+      \ 15th 2010)."
+    required: true
+    type: "string"
+    default: "2010-01-15"
+    format: "date"
+  temporal_resolution:
+    name: "temporal_resolution"
+    in: "query"
+    description: "The temporal resolution to use for results, should be one of 'hour'\
+      \ or 'day'. Default is 'day'"
+    required: false
+    type: "string"
+    default: "day"
+  score_type:
+    name: "score_type"
+    in: "query"
+    description: "The exposure score type to return. The accepted values vary by exposure\
+      \ type. For pm25 values are '7dayrisk', '14dayrisk'. Default is '7dayrisk' (NOT\
+      \ COMPLETE)."
+    required: false
+    type: "string"
+    default: "7dayrisk"
+  statistical_type:
+    name: "statistical_type"
+    in: "query"
+    description: "The statistic to use for results, should be one of 'max', 'mean',\
+      \ or 'median'. Default is 'max'"
+    required: false
+    type: "string"
+    default: "max"
+  exposure_point:
+    name: "exposure_point"
+    in: "query"
+    description: "A description of the location(s) to retrieve the exposure for. Locaton\
+      \ may be a single geocoordinate (example '35.9131996,-79.0558445') or a semicomma\
+      \ separated list of geocoord:dayhours giving the start and ending hours on specific\
+      \ days of the week at that location (example '35.9131996,-79.0558445,Sa0813;35.7795897,-78.6381787,other')\
+      \ indicates Saturdays from 8am to 1pm is at one location and all other times\
+      \ are at another location. Hours should be in 24 hours time using 2 digits,\
+      \ days of the week should be the first two characters of the day.If the day\
+      \ of the week does not appear then the time periods apply to all days (example\
+      \ '35.9131996,-79.0558445,0614,35.7795897,-78.6381787,1424') gives two time\
+      \ periods for all days. If hours do not appear then the time period applies\
+      \ to all hours of the day (example '35.9131996,-79.0558445,Sa,35.7795897,-78.6381787,Su')."
+    required: true
+    type: "string"
+    default: "35.9131996,-79.0558445"
+  latitude:
+    name: "latitude"
+    in: "query"
+    description: "Search coordinates that match or are like 'latitude'"
+    required: false
+    type: "string"
+  longitude:
+    name: "longitude"
+    in: "query"
+    description: "Search coordinates that match or are like 'longitude'"
+    required: false
+    type: "string"
+  radius:
+    name: "radius"
+    in: "query"
+    description: "radius in meters to search within for exposure point when a coordinate\
+      \ is provided. Range from 0 to 500"
+    required: false
+    type: "string"
+    default: "0"
+  page:
+    name: "page"
+    in: "query"
+    description: "Page number. Return up to 100 items per page"
+    required: false
+    type: "string"
+    default: "1"

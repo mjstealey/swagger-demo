@@ -12,12 +12,23 @@
     
     
     <item>
+      <title>swagger.yaml file</title>
+      <link>https://mjstealey.github.io/swagger-demo/swaggeryaml/</link>
+      <pubDate>Thu, 01 Jun 2017 15:14:39 -0400</pubDate>
+      
+      <guid>https://mjstealey.github.io/swagger-demo/swaggeryaml/</guid>
+      <description>Environmental Exposures API Swagger specification
+# Data Translator Environmental Exposure API # # This API provides access to environmental exposures. An exposure is # any factor outside a human body that can act upon the body to cause # a health impact, including chemical entities, biological entities, # physical factors (e.g., sunlight, temperature), and social environmental # factors (e.g., crime-induced stress, poverty). # # Exposures are parameterized by a range of temporal and spatial # factors that determine where a human has been and thus what factors they # were exposured to.</description>
+    </item>
+    
+    <item>
       <title>6. Exposures API</title>
       <link>https://mjstealey.github.io/swagger-demo/exposures/</link>
       <pubDate>Wed, 31 May 2017 19:52:22 -0400</pubDate>
       
       <guid>https://mjstealey.github.io/swagger-demo/exposures/</guid>
-      <description>Example of how Exposures API took shape using Swagger.</description>
+      <description>Example of how the Exposures API took shape using Swagger.
+Specification in Swagger At the start we had a notion of the data we wanted to serve, a list of sources to get it from, and a good idea of what this data looked like with some example datasets in a PostgreSQL / PostGIS database. Based on this information a specification file was started prior to the existence of any ReSTful service provider, so going down the rabbit hole of the swagger eco-system seemed a sensible thing to do.</description>
     </item>
     
     <item>

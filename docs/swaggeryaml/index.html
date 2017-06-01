@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="generator" content="Hugo 0.21" />
-    <meta name="description" content="Exposures API Example">
+    <meta name="description" content="Environmental Exposures Swagger definition">
 
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
 
-    <title>6. Exposures API :: Swagger Demo</title>
+    <title>swagger.yaml file :: Swagger Demo</title>
     <link href="/swagger-demo/css/nucleus.css" rel="stylesheet">
     <link href="/swagger-demo/css/font-awesome.min.css" rel="stylesheet">
     <link href="/swagger-demo/css/hybrid.css" rel="stylesheet">
@@ -29,7 +29,7 @@
     
 
   </head>
-  <body class="" data-url="/swagger-demo/exposures/">
+  <body class="" data-url="/swagger-demo/swaggeryaml/">
     
 <nav id="sidebar" class="">
   <div id="header-wrapper">
@@ -185,8 +185,8 @@
     
     
         <li data-nav-id="/swagger-demo/exposures/" class="dd-item 
-        active 
-        
+         
+        parent
         "
         >
             <a href="/swagger-demo/exposures/">
@@ -215,7 +215,7 @@
     
     
         <li data-nav-id="/swagger-demo/swaggeryaml/" class="dd-item 
-         
+        active 
         
         "
         >
@@ -224,6 +224,10 @@
                 
                 
             </a>
+            
+                
+                
+                
             
             
             
@@ -344,25 +348,13 @@
                   Swagger Demo
                 </a>
                 
-                   / <a href='/swagger-demo/exposures/'>6. Exposures API</a>
+                   / <a href='/swagger-demo/exposures/'>6. Exposures API</a> / <a href='/swagger-demo/swaggeryaml/'>swagger.yaml file</a>
                 
                 
             </div>
             <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#specification-in-swagger">Specification in Swagger</a></li>
-<li><a href="#python-flask-server">Python-Flask Server</a></li>
-<li><a href="#python-client">Python Client</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
+
     </div>
 </div>
 
@@ -371,22 +363,41 @@
         
         <div id="body-inner">
           
-            <h1>6. Exposures API</h1>
+            <h1>swagger.yaml file</h1>
           
 
 
+<p>Environmental Exposures API Swagger specification</p>
+
+<pre><code class="language-yaml"># Data Translator Environmental Exposure API
+#
+# This API provides access to environmental exposures. An exposure is
+# any factor outside a human body that can act upon the body to cause
+# a health impact, including chemical entities, biological entities,
+# physical factors (e.g., sunlight, temperature), and social environmental
+# factors (e.g., crime-induced stress, poverty).
+#
+# Exposures are parameterized by a range of temporal and spatial
+#  factors that determine where a human has been and thus what factors they
+#  were exposured to.
+#
+# Exposures are typically quantified at several levels:
+#   - raw value: a measured quantity for the exposure factor typically taken
+#       from an environmental sensor or other primary data collection method.
+#   - exposure value: a quantity derived from raw values that computes a
+#       a net exposure to the factor for a range of spatial and temporal
+#       coordinates. This value is often the result of interpolating raw values
+#       to cover all relevant spatial temporal coordinates. Values may also
+#       combine different raw value sources, such as primary and secondary
+#       measures of air particulates. Requests for exposure values may
+#       require indicating the computational method and parameters.
+#   - exposure score: a quantity derived from exposure and/or raw values that
+#       relates the exposure value to a risk score for a particular disease. Thus
+#       an exposure score for asthma may be different than a score for alzheimers
+#       despite being based on the same exposure values.
 
 
-<p>Example of how the Exposures API took shape using Swagger.</p>
-
-<h3 id="specification-in-swagger">Specification in Swagger</h3>
-
-<p>At the start we had a notion of the data we wanted to serve, a list of sources to get it from, and a good idea of what this data looked like with some example datasets in a PostgreSQL / PostGIS database. Based on this information a specification file was started prior to the existence of any ReSTful service provider, so going down the rabbit hole of the swagger eco-system seemed a sensible thing to do.</p>
-
-<p>We started with a <a href="https://mjstealey.github.io/swagger-demo/
-/swaggeryaml">specification</a> in swagger:</p>
-
-<pre><code class="language-yaml">swagger: &quot;2.0&quot;
+swagger: &quot;2.0&quot;
 info:
   title: &quot;Environmental Exposures API&quot;
   version: &quot;1.0.0&quot;
@@ -420,27 +431,279 @@ paths:
               $ref: '#/definitions/exposure_type'
         404:
           description: &quot;No exposure types found&quot;
-...
+
+  /exposures/{exposure_type}/values:
+    parameters:
+      - $ref: '#/parameters/exposure_type'
+    get:
+      summary: &quot;Get exposure value for a given environmental factor at exposure location(s)&quot;
+      description: &quot;Retrieve the computed exposure value(s) for a given environmental exposure factor, time period, and location(s).&quot;
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/start_date'
+        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/exposure_point'
+        - $ref: '#/parameters/temporal_resolution'
+        - $ref: '#/parameters/statistical_type'
+        - $ref: '#/parameters/radius'
+        - $ref: '#/parameters/page'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exposure'
+        400:
+          description: &quot;Invalid exposure parameter&quot;
+        404:
+          description: &quot;Values not found for exposure type&quot;
+
+  /exposures/{exposure_type}/scores:
+    parameters:
+      - $ref: '#/parameters/exposure_type'
+    get:
+      summary: &quot;Get exposure score for a given environmental factor at exposure location(s)&quot;
+      description: &quot;Retrieve the computed exposure score(s) for a given environmental exposure factor, time period, and location(s).&quot;
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/start_date'
+        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/exposure_point'
+        - $ref: '#/parameters/temporal_resolution'
+        - $ref: '#/parameters/score_type'
+        - $ref: '#/parameters/radius'
+        - $ref: '#/parameters/page'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exposure'
+        400:
+          description: &quot;Invalid exposure parameters&quot;
+        404:
+          description: &quot;Scores not found for exposure type&quot;
+
+  /exposures/{exposure_type}/coordinates:
+    parameters:
+      - $ref: '#/parameters/exposure_type'
+    get:
+      summary: &quot;Get exposure location(s) as latitude, longitude coordinates&quot;
+      description: &quot;Returns paginated list of available latitude, longitude coordinates for given exposure_type. Optionally the user can provide a latitude, longitude coordinate with a radius in meters to discover if an exposure location is within the requested range.&quot;
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/latitude'
+        - $ref: '#/parameters/longitude'
+        - $ref: '#/parameters/radius'
+        - $ref: '#/parameters/page'
+      responses:
+        200:
+          description: &quot;Exposure points&quot;
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordinate'
+        404:
+          description: &quot;No coordinates found for exposure type&quot;
+
+  /exposures/{exposure_type}/dates:
+    parameters:
+      - $ref: '#/parameters/exposure_type'
+    get:
+      summary: &quot;Get exposure start date and end date range for exposure type&quot;
+      description: &quot;Returns exposure start date and end date range for given exposure type&quot;
+      produces:
+        - application/json
+      responses:
+        200:
+          description: &quot;Date range&quot;
+          schema:
+            $ref: '#/definitions/date_range'
+        404:
+          description: &quot;No date range found for exposure type&quot;
+
+
+definitions:
+  exposure:
+    type: object
+    required:
+      - exposure_type
+    properties:
+      exposure_type:
+        type: string
+        example: &quot;pm25&quot;
+      start_time:
+        type: string
+        format: date-time
+        example: &quot;2010-01-15T00:00:00Z&quot;
+      end_time:
+        type: string
+        format: date-time
+        example: &quot;2010-01-15T23:00:00Z&quot;
+      value:
+        type: string
+        example: &quot;5.0 |OR| 17.7199974060059&quot;
+      units:
+        type: string
+        example: &quot;7dayrisk |OR| ugm3&quot;
+      latitude:
+        type: string
+        format: float
+        example: &quot;35.7795897&quot;
+      longitude:
+        type: string
+        format: float
+        example: &quot;-78.6381787&quot;
+
+  exposure_type:
+    type: object
+    properties:
+      exposure_type:
+        type: string
+        example: &quot;pm25&quot;
+      description:
+        type: string
+        example: &quot;exposure to airborne particulates: scores range from 1 (low &lt; 4.0 μg/m3) to 5 (high &gt; 11.37 μg/m3); values returned in μg/m3 abbreviated as ugm3&quot;
+      units:
+        type: string
+        example: &quot;ugm3&quot;
+      has_values:
+        type: boolean
+        example: true
+      has_scores:
+        type: boolean
+        example: true
+      schema_version:
+        type: string
+        example: &quot;1.0.0&quot;
+
+  coordinate:
+    type: object
+    properties:
+      latitude:
+        type: string
+        format: float
+        example: &quot;35.7795897&quot;
+      longitude:
+        type: string
+        format: float
+        example: &quot;-78.6381787&quot;
+
+  date_range:
+    type: object
+    properties:
+      start_date:
+        type: string
+        format: date-time
+        example: &quot;2010-01-01T00:00:00Z&quot;
+      end_date:
+        type: string
+        format: date-time
+        example: &quot;2010-01-31T00:00:00Z&quot;
+
+
+parameters:
+  exposure_type:
+    name: exposure_type
+    in: path
+    required: true
+    description: &quot;The name of the exposure type (currently limited to pm25, o3, haz_waste, crime, res_den, poverty, ses).&quot;
+    type: string
+    default: &quot;pm25&quot;
+
+  start_date:
+    name: start_date
+    in: query
+    required: true
+    description: &quot;The starting date to obtain exposures for (example 2010-01-06 is January 6th 2010).&quot;
+    type: string
+    format: date
+    default: &quot;2010-01-06&quot;
+
+  end_date:
+    name: end_date
+    in: query
+    required: true
+    description: &quot;The ending date to obtain exposures for (example 2010-01-15 is January 15th 2010).&quot;
+    type: string
+    format: date
+    default: &quot;2010-01-15&quot;
+
+  temporal_resolution:
+    name: temporal_resolution
+    in: query
+    required: false
+    description: &quot;The temporal resolution to use for results, should be one of 'hour' or 'day'. Default is 'day'&quot;
+    type: string
+    default: 'day'
+
+  score_type:
+    name: score_type
+    in: query
+    required: false
+    description: &quot;The exposure score type to return. The accepted values vary by exposure type. For pm25 values are '7dayrisk', '14dayrisk'. Default is '7dayrisk' (NOT COMPLETE).&quot;
+    type: string
+    default: '7dayrisk'
+
+  statistical_type:
+    name: statistical_type
+    in: query
+    required: false
+    description: &quot;The statistic to use for results, should be one of 'max', 'mean', or 'median'. Default is 'max'&quot;
+    type: string
+    default: 'max'
+
+  exposure_point:
+    name: exposure_point
+    in: query
+    required: true
+    description: &quot;A description of the location(s) to retrieve the exposure for. Locaton may be a single geocoordinate (example '35.9131996,-79.0558445') or a semicomma separated list of geocoord:dayhours giving the start and ending hours on specific days of the week at that location (example '35.9131996,-79.0558445,Sa0813;35.7795897,-78.6381787,other') indicates Saturdays from 8am to 1pm is at one location and all other times are at another location. Hours should be in 24 hours time using 2 digits, days of the week should be the first two characters of the day.If the day of the week does not appear then the time periods apply to all days (example '35.9131996,-79.0558445,0614,35.7795897,-78.6381787,1424') gives two time periods for all days. If hours do not appear then the time period applies to all hours of the day (example '35.9131996,-79.0558445,Sa,35.7795897,-78.6381787,Su').&quot;
+    type: string
+    default: &quot;35.9131996,-79.0558445&quot;
+
+  latitude:
+    name: latitude
+    in: query
+    required: false
+    description: &quot;Search coordinates that match or are like 'latitude'&quot;
+    type: string
+    default: &quot;&quot;
+
+  longitude:
+    name: longitude
+    in: query
+    required: false
+    description: &quot;Search coordinates that match or are like 'longitude'&quot;
+    type: string
+    default: &quot;&quot;
+
+  radius:
+    name: radius
+    in: query
+    required: false
+    description: radius in meters to search within for exposure point
+      coordinate is provided. Range from 0 to 500
+    type: string
+    default: &quot;0&quot;
+
+  page:
+    name: page
+    in: query
+    required: false
+    description: &quot;Page number. Return up to 100 items per page&quot;
+    type: string
+    default: 1
 </code></pre>
-
-<p>A couple early versions of the specification did make it into the smartAPI registry, but when copying an updated specification to the <a href="http://smart-api.info/editor/#/">smart-api.info/editor</a> it yielded no errors, however when the “Save” button is pressed it generates a pop-up error, even though the editor states “All changes saved”.</p>
-
-<p>Reference: <code>Error&quot;&lt;html&gt;&lt;title&gt;500: Internal Server Error&lt;/title&gt;&lt;body&gt;500: Internal Server Error&lt;/body&gt;&lt;/html&gt;&quot;</code></p>
-
-<h3 id="python-flask-server">Python-Flask Server</h3>
-
-<p><img src="https://mjstealey.github.io/swagger-demo/
-/images/pythonserver.png" alt="Python-flask server" /></p>
-
-<h3 id="python-client">Python Client</h3>
-
-<p><img src="https://mjstealey.github.io/swagger-demo/
-/images/pythonclient.png" alt="Python client" /></p>
 
 
 <footer class=" footline" >
 	
-	    <i class='fa fa-user'></i> <a href="mailto:michael.j.stealey@gmail.com">Michael J. Stealey</a>  <i class='fa fa-calendar'></i> 31/05/2017
+	    <i class='fa fa-user'></i> <a href="mailto:michael.j.stealey@gmail.com">Michael J. Stealey</a>  <i class='fa fa-calendar'></i> 01/06/2017
 	    </div>
 	
 </footer>
@@ -518,31 +781,31 @@ paths:
             
                 
                     
-                    
                 
                 
                 
                     
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+                
+            
+        
+        
+            
             
             
                 
                     
                         
                         
-                    
-                
-                
-                
-            
-        
-                
-            
-        
-        
-            
-            
-            
-                
                     
                 
                 
@@ -555,10 +818,10 @@ paths:
 
 
         
-            <a class="nav nav-prev" href="/swagger-demo/apiclient/" title="5. API Client"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/swagger-demo/exposures/" title="6. Exposures API"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/swagger-demo/swaggeryaml/" title="swagger.yaml file" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/swagger-demo/references/" title="References" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 

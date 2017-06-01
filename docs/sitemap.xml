@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/exposures/</loc>
+    <lastmod>2017-05-31T19:52:22-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/references/</loc>
+    <lastmod>2017-05-31T19:46:54-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/apiclient/</loc>
+    <lastmod>2017-05-31T15:27:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/apiserver/</loc>
+    <lastmod>2017-05-31T15:27:47-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/apispec/</loc>
+    <lastmod>2017-05-31T15:27:39-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/smartapi/</loc>
+    <lastmod>2017-05-31T15:27:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/swagger/</loc>
+    <lastmod>2017-05-31T15:27:15-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/</loc>
+    <lastmod>2017-05-31T14:04:36-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/_header/</loc>
+    <lastmod>2017-05-31T14:03:12-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mjstealey.github.io/swagger-demo/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

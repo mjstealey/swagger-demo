@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.21" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+
+    <title>1. What is Swagger? :: Swagger Demo</title>
+    <link href="/swagger-demo/css/nucleus.css" rel="stylesheet">
+    <link href="/swagger-demo/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/swagger-demo/css/hybrid.css" rel="stylesheet">
+    <link href="/swagger-demo/css/featherlight.min.css" rel="stylesheet">
+    <link href="/swagger-demo/css/horsey.css" rel="stylesheet">
+    <link href="/swagger-demo/css/theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="/swagger-demo/css/bootstrap.min.css">
+    <script src="/swagger-demo/js/jquery-2.x.min.js"></script>
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left {
+        display:none !important;
+      }
+    </style>
+
+    
+
+    
+
+  </head>
+  <body class="" data-url="/swagger-demo/swagger/">
+    
+<nav id="sidebar" class="">
+  <div id="header-wrapper">
+    <div id="header">
+       
+	<p>Swagger Demo</p>
+ 
+
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+<script type="text/javascript" src="/swagger-demo/js/lunr.min.js"></script>
+<script type="text/javascript" src="/swagger-demo/js/horsey.js"></script>
+<script type="text/javascript">
+    var baseurl = "https:\/\/mjstealey.github.io\/swagger-demo\/";
+</script>
+<script type="text/javascript" src="/swagger-demo/js/search.js"></script>
+
+    
+  </div>
+
+  <div class="highlightable">
+    <ul class="topics">
+        
+            <li data-nav-id="/swagger-demo/" class="dd-item">
+            <a href="/swagger-demo/"><i class="fa fa-fw fa-home"></i></a>
+            </li>
+        
+
+        
+        
+        
+        
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/swagger/" class="dd-item 
+        active 
+        
+        "
+        >
+            <a href="/swagger-demo/swagger/">
+                <span>1. What is Swagger?</span>
+                
+                
+            </a>
+            
+                
+                
+                
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/smartapi/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/smartapi/">
+                <span>2. Swagger vs SmartAPI</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/apispec/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/apispec/">
+                <span>3. API Specification</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/apiserver/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/apiserver/">
+                <span>4. API Server</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/apiclient/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/apiclient/">
+                <span>5. API Client</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/exposures/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/exposures/">
+                <span>6. Exposures API</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+            
+    
+    
+    
+    
+        <li data-nav-id="/swagger-demo/references/" class="dd-item 
+         
+        
+        "
+        >
+            <a href="/swagger-demo/references/">
+                <span>References</span>
+                
+                
+            </a>
+            
+            
+            
+        </li>
+    
+
+        
+
+        
+
+        
+        
+        
+        <section id="shortcuts">
+            
+                <li class="" role="">
+                    <h3>More</h3>
+                    <a href="https://github.com/mjstealey/swagger-demo/"><i class='fa fa-github'></i> mjstealey/swagger-demo</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="https://github.com/mjstealey/exposures-api"><i class='fa fa-github'></i> mjstealey/exposures-api</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="https://github.com/WebsmartAPI"><i class='fa fa-github'></i> WebsmartAPI (smartAPI)</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="https://github.com/swagger-api"><i class='fa fa-github'></i> swagger-api</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="http://smart-api.info"><i class='fa fa-bookmark'></i> smartAPI Documentation</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="http://swagger.io/docs/"><i class='fa fa-bookmark'></i> swagger.io Documentation</a>
+                    
+                </li>
+            
+                <li class="" role="">
+                    
+                    <a href="https://app.swaggerhub.com/"><i class='fa fa-bookmark'></i> swaggerhub</a>
+                    
+                </li>
+            
+        </section>    
+        
+        
+
+        
+    </ul>
+    
+     
+    <section id="footer">
+      
+    </section>
+  </div>
+</nav>
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+        
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><a href=""><i class="fa fa-list-alt"></i></a></span>
+                <a href="https://mjstealey.github.io/swagger-demo/">
+                  <span class="fa fa-arrow-circle-right" style="font-size:larger" aria-hidden="true"></span>
+                  Swagger Demo
+                </a>
+                
+                   / <a href='/swagger-demo/swagger/'>1. What is Swagger?</a>
+                
+                
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#swagger-editor">Swagger Editor</a></li>
+<li><a href="#why-are-there-two-different-uis-for-swagger">Why are there two different UIs for Swagger?</a></li>
+<li><a href="#what-are-integrations">What are Integrations?</a></li>
+<li><a href="#what-is-swaggerhub-for">What is SwaggerHub for?</a></li>
+<li><a href="#but-i-use-github-bitbucket-gitlab-how-is-this-different">But I use GitHub / BitBucket / GitLab, how is this different?</a></li>
+<li><a href="#what-does-publishing-an-api-do">What does Publishing an API do?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+          </div>
+        
+        
+        <div id="body-inner">
+          
+            <h1>1. What is Swagger?</h1>
+          
+
+
+
+
+<p>Swagger allows you to describe the structure of your APIs so that machines can read them.</p>
+
+<p>The ability of APIs to describe their own structure is the root of all awesomeness in Swagger. Why is it so great? Well, by reading your API’s structure, we can automatically build beautiful and interactive API documentation. We can also automatically generate client libraries for your API in many languages and explore other possibilities like automated testing.</p>
+
+<p>Swagger does this by asking your API to return a YAML or JSON that contains a detailed description of your entire API. This file is essentially a resource listing of your API which adheres to <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md">OpenAPI Specification</a>. The specification asks you to include information like:</p>
+
+<ul>
+<li>What are all the operations that your API supports?</li>
+<li>What are your API’s parameters and what does it return?</li>
+<li>Does your API need some authorization?</li>
+<li>And even fun things like terms, contact information and license to use the API.</li>
+</ul>
+
+<p>You can write a Swagger spec for your API manually, or have it generated automatically from annotations in your source code. Check <a href="https://swagger.io/open-source-integrations/">swagger.io/open-source-integrations</a> for a list of tools that let you generate Swagger from code.</p>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/swaggerio.png" alt="swagger.io" /></p>
+
+<p><strong>The goal of Swagger</strong> is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined via Swagger, a consumer can understand and interact with the remote service with a minimal amount of implementation logic. Similar to what interfaces have done for lower-level programming, Swagger removes the guesswork in calling the service.</p>
+
+<p>Technically speaking - Swagger is a <a href="http://swagger.io/getting-started/specification">formal specification</a> surrounded by a large ecosystem of tools, which includes everything from front-end user interfaces, low-level code libraries and commercial API management solutions.</p>
+
+<h3 id="swagger-editor">Swagger Editor</h3>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/swaggereditor.png" alt="swagger editor" /></p>
+
+<h3 id="why-are-there-two-different-uis-for-swagger">Why are there two different UIs for Swagger?</h3>
+
+<p>Indeed there are two different user interfaces for working with Swagger definitions. The Editor tab provides a YAML-based text editor with contextual auto-suggestions for content. On the right side of the screen, a live rendering is produced, making it easy to visualize the API definition that you’re creating.</p>
+
+<p>Alternatively the UI tab will show you a read only view of the API, tailored for consumers of the API. We have found that these distinct views give the most flexibility for understanding the intent of the API.</p>
+
+<h3 id="what-are-integrations">What are Integrations?</h3>
+
+<p>Integrations are free add-ons to your API definition on SwaggerHub to improve and expand its functionality. These Integrations help connect your API to a host of 3rd party tools which allow you to go beyond just API design on SwaggerHub! You could sync your definition with a GitHub repository, quickly generate a mock for your Swagger definition or create a webhook to trigger for certain events on SwaggerHub!</p>
+
+<p><a href="https://app.swaggerhub.com/help/integrations/index">Learn more here</a>.</p>
+
+<h3 id="what-is-swaggerhub-for">What is SwaggerHub for?</h3>
+
+<p>SwaggerHub is an integrated API Development platform, built for teams, that brings the core capabilities of the Swagger framework to design, build, document and deploy APIs. SwaggerHub enables development teams to collaborate and coordinate the entire lifecycle of an API with the flexibility to integrate with the toolset of your choice.</p>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/swaggerhub.png" alt="swaggerhub" /></p>
+
+<h3 id="but-i-use-github-bitbucket-gitlab-how-is-this-different">But I use GitHub / BitBucket / GitLab, how is this different?</h3>
+
+<p>Source control is great for source. But API definitions aren’t quite the same - they deserve their own, first-class treatment. SwaggerHub works in conjunction with version control systems, so hunting through source code should no longer be necessary.</p>
+
+<p>SwaggerHub does allow connections to the GitHub, GitLab and Bitbucket, with others on the way. See here to learn more about our integrations.</p>
+
+<h3 id="what-does-publishing-an-api-do">What does Publishing an API do?</h3>
+
+<p>When you create an API and make it available for users to consume, you are creating a contract for them. They rely on that definition to work a certain way, and breaking changes will potentially break their integrations.</p>
+
+<p>Publishing an API is specific to a single version of an API. You should do so when the API ships and users can rely on the signatures. It tells your teams and consumers that your API is in a stable state. Once published, it is read-only and cannot be changed.</p>
+
+<p>When published, you should consider making changes in a new version of your API.</p>
+
+<p>After you publish, you may want to update the default version of the API. This is what is shown in search results, or when someone navigates to your API directly without a specific version number. You can <a href="https://app.swaggerhub.com/help/apis/versioning">learn more about versioning here</a>.</p>
+
+<p>Of course, there are always unforeseen situations where you may have a typo or need to make an emergency change. You can <strong>Unpublish</strong> your API but please do so carefully. Trust with your users is precious!</p>
+
+<p><a href="https://app.swaggerhub.com/help/apis/publishing-api">Learn more about publishing APIs here</a>.</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+
+      </div>
+    </div>
+
+    
+ 
+    
+
+    <div id="navigation">
+        
+        
+        
+            
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+        
+            
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+          
+
+        
+
+
+        
+        
+            <a class="nav nav-next" href="/swagger-demo/smartapi/" title="2. Swagger vs SmartAPI" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/swagger-demo/js/clipboard.min.js"></script>
+    <script src="/swagger-demo/js/jquery.sticky-kit.min.js"></script>
+    <script src="/swagger-demo/js/featherlight.min.js"></script>
+    <script src="/swagger-demo/js/html5shiv-printshiv.min.js"></script>
+    <script src="/swagger-demo/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/swagger-demo/js/modernizr.custom.71422.js"></script>
+    <script src="/swagger-demo/js/learn.js"></script>
+    <script src="/swagger-demo/js/hugo-learn.js"></script>
+
+    
+    <link href="/swagger-demo/mermaid/mermaid.css" type="text/css" rel="stylesheet"/>
+    <script src="/swagger-demo/mermaid/mermaid.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    
+
+    
+
+  </body>
+</html>
+

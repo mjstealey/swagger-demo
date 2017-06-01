@@ -1,0 +1,52 @@
+baseURL = "https://mjstealey.github.io/swagger-demo/"
+languageCode = "en-us"
+title = "Swagger Demo"
+theme = "docdock"
+publishDir = "../docs"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[[menu.shortcuts]]
+pre = "<h3>More</h3>"
+
+name = "<i class='fa fa-github'></i> mjstealey/swagger-demo"
+identifier = "repo"
+url = "https://github.com/mjstealey/swagger-demo/"
+weight = 1
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-github'></i> WebsmartAPI (smartAPI)"
+identifier = "websmart"
+url = "https://github.com/WebsmartAPI"
+weight = 3
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-github'></i> swagger-api"
+identifier = "swagger-api"
+url = "https://github.com/swagger-api"
+weight = 3
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-github'></i> mjstealey/exposures-api"
+identifier = "exposures"
+url = "https://github.com/mjstealey/exposures-api"
+weight = 2
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-bookmark'></i> swagger.io Documentation"
+identifier = "swagger"
+url = "http://swagger.io/docs/"
+weight = 6
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-bookmark'></i> swaggerhub"
+identifier = "swaggerhub"
+url = "https://app.swaggerhub.com/"
+weight = 7
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-bookmark'></i> smartAPI Documentation"
+identifier = "smartapi"
+url = "http://smart-api.info"
+weight = 5

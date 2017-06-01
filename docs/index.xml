@@ -12,7 +12,27 @@
     
     
     <item>
-      <title>swagger.yaml file</title>
+      <title>Python Client</title>
+      <link>https://mjstealey.github.io/swagger-demo/pythonclient/</link>
+      <pubDate>Thu, 01 Jun 2017 16:14:11 -0400</pubDate>
+      
+      <guid>https://mjstealey.github.io/swagger-demo/pythonclient/</guid>
+      <description>Using the generated python-client code from swagger, we ran the code as suggested in the accompanied documentation.
+$ cd /PATH/TO/python-client-generated $ virtualenv -p /usr/local/bin/python3 venv3 Running virtualenv with interpreter /usr/local/bin/python3 Using base prefix &#39;/usr/local/Cellar/python3/3.6.0_1/Frameworks/Python.framework/Versions/3.6&#39; New python executable in /Users/stealey/Github/irods/swagger-demo/python-client-generated/venv3/bin/python3.6 Also creating executable in /Users/stealey/Github/irods/swagger-demo/python-client-generated/venv3/bin/python Installing setuptools, pip, wheel...done. $ source venv3/bin/activate stealey at dhcp152-54-9-79 in ~/Github/irods/swagger-demo/python-client-generated (master●●) (venv3)$ pip install -r requirements.txt Collecting certifi&amp;gt;=14.05.14 (from -r requirements.txt (line 1)) Using cached certifi-2017.</description>
+    </item>
+    
+    <item>
+      <title>Python-Flask Server</title>
+      <link>https://mjstealey.github.io/swagger-demo/pythonserver/</link>
+      <pubDate>Thu, 01 Jun 2017 15:50:42 -0400</pubDate>
+      
+      <guid>https://mjstealey.github.io/swagger-demo/pythonserver/</guid>
+      <description>Using the generated stub code from swagger, we ran the code as suggested in the accompanied documentation.
+$ cd /PATH/TO/python-flask-server-generated $ virtualenv -p /usr/local/bin/python3 venv3 Running virtualenv with interpreter /usr/local/bin/python3 Using base prefix &#39;/usr/local/Cellar/python3/3.6.0_1/Frameworks/Python.framework/Versions/3.6&#39; New python executable in /Users/stealey/Github/irods/swagger-demo/python-flask-server-generated/venv3/bin/python3.6 Also creating executable in /Users/stealey/Github/irods/swagger-demo/python-flask-server-generated/venv3/bin/python Installing setuptools, pip, wheel...done. $ source venv3/bin/activate (venv3)$ pip install -U connexion Collecting connexion Downloading connexion-1.1.10-py3-none-any.whl (1.0MB) 100% |████████████████████████████████| 1.0MB 982kB/s Collecting flask&amp;gt;=0.10.1 (from connexion) Downloading Flask-0.</description>
+    </item>
+    
+    <item>
+      <title>Swagger YAML file</title>
       <link>https://mjstealey.github.io/swagger-demo/swaggeryaml/</link>
       <pubDate>Thu, 01 Jun 2017 15:14:39 -0400</pubDate>
       

@@ -3,6 +3,11 @@ date = "2017-05-31T15:27:15-04:00"
 description = ""
 title = "1. What is Swagger?"
 
+creatordisplayname = "Michael J. Stealey"
+creatoremail = "michael.j.stealey@gmail.com"
+lastmodifierdisplayname = "Michael J. Stealey"
+lastmodifieremail = "michael.j.stealey@gmail.com"
+
 [menu]
 
   [menu.main]
@@ -41,10 +46,6 @@ Indeed there are two different user interfaces for working with Swagger definiti
 
 Alternatively the UI tab will show you a read only view of the API, tailored for consumers of the API. We have found that these distinct views give the most flexibility for understanding the intent of the API.
 
-### What are Integrations?
-
-Integrations are free add-ons to your API definition on SwaggerHub to improve and expand its functionality. These Integrations help connect your API to a host of 3rd party tools which allow you to go beyond just API design on SwaggerHub! You could sync your definition with a GitHub repository, quickly generate a mock for your Swagger definition or create a webhook to trigger for certain events on SwaggerHub!
-
 [Learn more here](https://app.swaggerhub.com/help/integrations/index).
 
 ### What is SwaggerHub for?
@@ -57,7 +58,11 @@ SwaggerHub is an integrated API Development platform, built for teams, that brin
 
 Source control is great for source. But API definitions aren’t quite the same - they deserve their own, first-class treatment. SwaggerHub works in conjunction with version control systems, so hunting through source code should no longer be necessary.
 
-SwaggerHub does allow connections to the GitHub, GitLab and Bitbucket, with others on the way. See here to learn more about our integrations.
+SwaggerHub integrations does allow connections to the GitHub, GitLab and Bitbucket, with others on the way.
+
+### What are Integrations?
+
+Integrations are free add-ons to your API definition on SwaggerHub to improve and expand its functionality. These Integrations help connect your API to a host of 3rd party tools which allow you to go beyond just API design on SwaggerHub! You could sync your definition with a GitHub repository, quickly generate a mock for your Swagger definition or create a webhook to trigger for certain events on SwaggerHub!
 
 ### What does Publishing an API do?
 

@@ -46,9 +46,10 @@ API clients:
       <pubDate>Wed, 31 May 2017 15:27:47 -0400</pubDate>
       
       <guid>https://mjstealey.github.io/swagger-demo/apiserver/</guid>
-      <description>Swagger Codegen: Remove tedious plumbing and configuration by generating boilerplate server code in over 20 different languages
-Server stubs:
- C# (ASP.NET Core, NancyFx), Erlang, Go, Haskell, Java (MSF4J, Spring, Undertow, JAX-RS: CDI, CXF, Inflector, RestEasy), PHP (Lumen, Slim, Silex, Zend Expressive), Python (Flask), NodeJS, Ruby (Sinatra, Rails5), Scala (Finch, Scalatra)  Server stub generator HOWTO</description>
+      <description>Server generation is still strictly a developer task and swagger isn&amp;rsquo;t providing any particular magic here.
+If you already have a server that delivers valid output in accordance with your swagger specification, then you&amp;rsquo;re done with this section and can move on.
+If you&amp;rsquo;re starting from scratch and the swagger specification is the first step for your project, then swagger codegen may be of interest to you.
+Swagger Codegen: Remove tedious plumbing and configuration by generating boilerplate server code in over 20 different languages</description>
     </item>
     
     <item>

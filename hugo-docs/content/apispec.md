@@ -3,6 +3,11 @@ date = "2017-05-31T15:27:39-04:00"
 description = ""
 title = "3. API Specification"
 
+creatordisplayname = "Michael J. Stealey"
+creatoremail = "michael.j.stealey@gmail.com"
+lastmodifierdisplayname = "Michael J. Stealey"
+lastmodifieremail = "michael.j.stealey@gmail.com"
+
 [menu]
 
   [menu.main]
@@ -25,3 +30,20 @@ OpenAPI does not require you to rewrite your existing API. It does not require b
 This [GitHub project](https://github.com/OAI/OpenAPI-Specification) is the starting point for OpenAPI. Here you will find the information you need about the OpenAPI Specification, a simple static sample of what it looks like, and some general information regarding the project.
 
 [The pre-release OAS 3.0.0 Specification Branch](https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md)
+
+![OpenAPI specification]({{<baseurl>}}/images/openapispec.png)
+
+### smartAPI Specification
+
+This [document](https://websmartapi.github.io/smartapi_specification/) presents a set of 54 metadata elements (organized into five categories) to usefully describe Web-based Application Programming Interfaces (APIs). These elements were developed by the Big Data to Knowledge (BD2K) API Interoperability Working Group, which conducted a survey of API metadata used in the real world. This group developed the smartAPI Specification as an extension of existing repositories such as Programmable Web, Biocatalogue, and available standards including Open API, schema.org, etc. The aim of the BD2K API Interoperability Working Group is to develop a strategy for maximizing interoperability and reuse of Web-based APIs. This specification aims to serve as a standard for API development that will facilitate the efficient communication among APIs and reduce development costs. The smartAPI Specification includes 21 metadata elements beyond those included in the Open API Initiative. The metadata elements are grouped into categories related to APIs, service providers, API operations, operation parameters, and operation responses. For each category, the metadata elements that are mandatory, recommended, or optional are described and illustrated by examples. The widespread adoption of the smartAPI Specification by the community promises to improve the efficiency and lower the costs of API development, promoting cross-API compatibility and resolving current challenges in API usage.
+
+![smartAPI specification]({{<baseurl>}}/images/smartapispec.png)
+
+### Specification enforcement
+
+Specification is enforced within the editor as seen in this example.
+
+- Left: **responsibleOrganization** is left uncommented and violates OpenAPI specification for valid **additionalProperty**
+- Right: **responsibleDeveloper** is commented and violates smartAPI specification for "Missing required property: responsibleDeveloper"
+
+![Enforce specification]({{<baseurl>}}/images/enforcespec.png)

@@ -328,6 +328,7 @@
 <li><a href="#smartapi-editor-a-tool-for-semantic-annotation-of-web-apis">smartAPI Editor: A tool for semantic annotation of Web APIs</a></li>
 <li><a href="#why-do-we-need-smartapis">Why do we need smartAPIs?</a></li>
 <li><a href="#what-does-the-smartapi-offer">What does the smartAPI offer?</a></li>
+<li><a href="#questions-concerns-regarding-smartapi">Questions / Concerns regarding smartAPI</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -383,8 +384,36 @@
 
 <p>Richly annotated APIs will provide the assets by which users will be able to search, browse, query, and reuse APIs. Users and intelligent agents being able to traverse a highly connected network of smartAPIs. Users will be able to automatically find APIs whose outputs are the inputs for other services. Ultimately, we envision the automatic generation of workflows that take users to where they want to go with what they have today.</p>
 
+<h3 id="questions-concerns-regarding-smartapi">Questions / Concerns regarding smartAPI</h3>
+
+<p><strong>NOTE</strong>: The following observations should be taken with a grain of salt as the smartAPI effort is still under development.</p>
+
+<p>Looks to have recently diverged it&rsquo;s source from the swagger fork it was using: <a href="https://github.com/WebsmartAPI/smartAPI-editor">https://github.com/WebsmartAPI/smartAPI-editor</a></p>
+
+<ul>
+<li>Don&rsquo;t know if this was strictly for <a href="https://zenodo.org/record/580097#.WTBJLcaZPUI">DOI purposes</a>, or for ongoing work, but detaching from the original repository makes it difficult to include future improvements made to swagger itself.</li>
+<li>The branch from which the DOI version is from shows <strong>This branch is 54 commits ahead, 190 commits behind swagger-api:master.</strong> So there is concern about the fork growing stale with respect to the current state of OpenAPI as implemented in swagger.</li>
+<li>The OpenAPI Specification (OAS) 3.0 is in <a href="https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md">pre-release</a> and it&rsquo;s unclear how this would be ported into smartAPI.</li>
+</ul>
+
+<p>It was denoted during that hackathon that parameters were not necessarily parsed as expected when compared to standard swagger.</p>
+
+<ul>
+<li>This was denoted with the <a href="http://smart-api.info/registry/">Broad probabilistic graphical models translator</a> and brought to Michel&rsquo;s attention.</li>
+<li>Transferred swagger.yaml file to swagger-editor for testing and syntax passed once smartAPI specific components were commented out.</li>
+</ul>
+
+<p>Seemingly valid syntax from swagger-editor is not always accepted by smartAPI-editor</p>
+
+<ul>
+<li>The editor wouldn&rsquo;t flag anything in particular, but the spec would fail when attempting to save to the registry with a 500 error.</li>
+</ul>
+
 
 <footer class=" footline" >
+	
+	    <i class='fa fa-user'></i> <a href="mailto:michael.j.stealey@gmail.com">Michael J. Stealey</a>  <i class='fa fa-calendar'></i> 31/05/2017
+	    </div>
 	
 </footer>
 

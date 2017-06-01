@@ -325,6 +325,8 @@
 <li>
 <ul>
 <li><a href="#the-openapi-specification-fka-the-swagger-specification">The OpenAPI Specification (fka The Swagger Specification)</a></li>
+<li><a href="#smartapi-specification">smartAPI Specification</a></li>
+<li><a href="#specification-enforcement">Specification enforcement</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -357,8 +359,33 @@
 
 <p><a href="https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md">The pre-release OAS 3.0.0 Specification Branch</a></p>
 
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/openapispec.png" alt="OpenAPI specification" /></p>
+
+<h3 id="smartapi-specification">smartAPI Specification</h3>
+
+<p>This <a href="https://websmartapi.github.io/smartapi_specification/">document</a> presents a set of 54 metadata elements (organized into five categories) to usefully describe Web-based Application Programming Interfaces (APIs). These elements were developed by the Big Data to Knowledge (BD2K) API Interoperability Working Group, which conducted a survey of API metadata used in the real world. This group developed the smartAPI Specification as an extension of existing repositories such as Programmable Web, Biocatalogue, and available standards including Open API, schema.org, etc. The aim of the BD2K API Interoperability Working Group is to develop a strategy for maximizing interoperability and reuse of Web-based APIs. This specification aims to serve as a standard for API development that will facilitate the efficient communication among APIs and reduce development costs. The smartAPI Specification includes 21 metadata elements beyond those included in the Open API Initiative. The metadata elements are grouped into categories related to APIs, service providers, API operations, operation parameters, and operation responses. For each category, the metadata elements that are mandatory, recommended, or optional are described and illustrated by examples. The widespread adoption of the smartAPI Specification by the community promises to improve the efficiency and lower the costs of API development, promoting cross-API compatibility and resolving current challenges in API usage.</p>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/smartapispec.png" alt="smartAPI specification" /></p>
+
+<h3 id="specification-enforcement">Specification enforcement</h3>
+
+<p>Specification is enforced within the editor as seen in this example.</p>
+
+<ul>
+<li>Left: <strong>responsibleOrganization</strong> is left uncommented and violates OpenAPI specification for valid <strong>additionalProperty</strong></li>
+<li>Right: <strong>responsibleDeveloper</strong> is commented and violates smartAPI specification for &ldquo;Missing required property: responsibleDeveloper&rdquo;</li>
+</ul>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/enforcespec.png" alt="Enforce specification" /></p>
+
 
 <footer class=" footline" >
+	
+	    <i class='fa fa-user'></i> <a href="mailto:michael.j.stealey@gmail.com">Michael J. Stealey</a>  <i class='fa fa-calendar'></i> 31/05/2017
+	    </div>
 	
 </footer>
 

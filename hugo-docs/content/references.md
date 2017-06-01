@@ -3,6 +3,11 @@ date = "2017-05-31T19:46:54-04:00"
 description = ""
 title = "References"
 
+creatordisplayname = "Michael J. Stealey"
+creatoremail = "michael.j.stealey@gmail.com"
+lastmodifierdisplayname = "Michael J. Stealey"
+lastmodifieremail = "michael.j.stealey@gmail.com"
+
 [menu]
 
   [menu.main]

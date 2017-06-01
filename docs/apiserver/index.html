@@ -331,6 +331,12 @@
           
 
 
+<p>Server generation is still strictly a developer task and swagger isn&rsquo;t providing any particular magic here.</p>
+
+<p>If you already have a server that delivers valid output in accordance with your swagger specification, then you&rsquo;re done with this section and can move on.</p>
+
+<p>If you&rsquo;re starting from scratch and the swagger specification is the first step for your project, then <strong>swagger codegen</strong> may be of interest to you.</p>
+
 <p><strong>Swagger Codegen</strong>: Remove tedious plumbing and configuration by generating boilerplate server code in over 20 different languages</p>
 
 <p>Server stubs:</p>
@@ -340,12 +346,19 @@
 </ul>
 
 <p><img src="https://mjstealey.github.io/swagger-demo/
-/images/swaggerserver.png" alt="swager server" /></p>
+/images/swaggerserver.png" alt="swagger server" /></p>
 
 <p>Server stub generator <a href="https://github.com/swagger-api/swagger-codegen/wiki/Server-stub-generator-HOWTO">HOWTO</a></p>
 
+<p>The server stubs will use the naming conventions as encoded in the specification file and generate the templates required to start encoding the logic for your server.</p>
+
+<p>It should be noted that there is no safeguards against doing nonsensical things and making a mess of your server code.</p>
+
 
 <footer class=" footline" >
+	
+	    <i class='fa fa-user'></i> <a href="mailto:michael.j.stealey@gmail.com">Michael J. Stealey</a>  <i class='fa fa-calendar'></i> 31/05/2017
+	    </div>
 	
 </footer>
 

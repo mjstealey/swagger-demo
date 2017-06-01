@@ -8,6 +8,8 @@ title = "Home"
 
 A brief demo / tutorial reviewing the basics of Swagger and how it relates to smartAPI. The [Exposures API](https://github.com/mjstealey/exposures-api) work will be used to illustrate some topics in this demo.
 
+![swagger banner]({{<baseurl>}}/images/swaggerbanner.png)
+
 ### 1. [What is Swagger?]({{<baseurl>}}/swagger/)
 ### 2. [Swagger vs SmartAPI]({{<baseurl>}}/smartapi/)
 ### 3. [API Specification]({{<baseurl>}}/apispec/)

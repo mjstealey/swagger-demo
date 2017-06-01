@@ -1,7 +1,7 @@
 +++
 date = "2017-06-01T15:14:39-04:00"
 description = "Environmental Exposures Swagger definition"
-title = "swagger.yaml file"
+title = "Swagger YAML file"
 
 creatordisplayname = "Michael J. Stealey"
 creatoremail = "michael.j.stealey@gmail.com"

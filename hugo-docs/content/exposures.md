@@ -69,7 +69,15 @@ Reference: `Error"<html><title>500: Internal Server Error</title><body>500: Inte
 
 ### Python-Flask Server
 
+The swagger-editor offers an option to generate server stubs using swagger-codegen in many different languages. We chose to implement our Exposures API in Python and used the **python-flask** option.
+
 ![Python-flask server]({{<baseurl>}}/images/pythonserver.png)
+
+The [resultant code](https://github.com/mjstealey/swagger-demo/tree/master/python-flask-server-generated) gives some suggestion as to how it "should" be implemented and made reference to a [Connexion](https://github.com/zalando/connexion) library on top of Flask.
+
+![Swagger generated server]({{<baseurl>}}/images/generatedserver.png)
+
+And when you run the code as described you get [this]({{<baseurl>}}/pythonserver).
 
 ### Python Client
 

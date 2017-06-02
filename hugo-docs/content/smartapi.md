@@ -51,17 +51,18 @@ Richly annotated APIs will provide the assets by which users will be able to sea
 
 **NOTE**: The following observations should be taken with a grain of salt as the smartAPI effort is still under development.
 
-Looks to have recently diverged it's source from the swagger fork it was using: [https://github.com/WebsmartAPI/smartAPI-editor](https://github.com/WebsmartAPI/smartAPI-editor)
+Project looks to have recently diverged it's source from the swagger fork it was using: [https://github.com/WebsmartAPI/smartAPI-editor](https://github.com/WebsmartAPI/smartAPI-editor)
 
-- Don't know if this was strictly for [DOI purposes](https://zenodo.org/record/580097#.WTBJLcaZPUI), or for ongoing work, but detaching from the original repository makes it difficult to include future improvements made to swagger itself.
-- The branch from which the DOI version is from shows **This branch is 54 commits ahead, 190 commits behind swagger-api:master.** So there is concern about the fork growing stale with respect to the current state of OpenAPI as implemented in swagger.
+- Don't know if this was strictly for [DOI purposes](https://zenodo.org/record/580097#.WTBJLcaZPUI), or for work going forward, but detaching from the original repository makes it difficult to include future improvements made to the swagger source itself.
+- The branch from which the DOI version is from shows "**This branch is 54 commits ahead, 190 commits behind swagger-api:master.**" so there is concern about the fork growing stale with respect to the current state of OpenAPI as implemented in swagger.
 - The OpenAPI Specification (OAS) 3.0 is in [pre-release](https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/README.md) and it's unclear how this would be ported into smartAPI.
 
 It was denoted during that hackathon that parameters were not necessarily parsed as expected when compared to standard swagger.
 
-- This was denoted with the [Broad probabilistic graphical models translator](http://smart-api.info/registry/) and brought to Michel's attention.
-- Transferred swagger.yaml file to swagger-editor for testing and syntax passed once smartAPI specific components were commented out.
+- This was the case with the [Broad probabilistic graphical models translator](http://smart-api.info/registry/) and brought to Michel's attention.
+- Transferred the Broad pgm swagger.yaml file to swagger-editor for testing and syntax passed once smartAPI specific components were commented out.
 
-Seemingly valid syntax from swagger-editor is not always accepted by smartAPI-editor
+Seemingly valid syntax from swagger-editor is not always accepted by smartAPI-editor (Exposures API)
 
 - The editor wouldn't flag anything in particular, but the spec would fail when attempting to save to the registry with a 500 error.
+- Unsure if smartAPI is updating a version of swagger-codegen to correspond to changes made w.r.t. specifications.

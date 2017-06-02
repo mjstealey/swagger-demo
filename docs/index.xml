@@ -47,7 +47,7 @@ $ cd /PATH/TO/python-flask-server-generated $ virtualenv -p /usr/local/bin/pytho
       <pubDate>Wed, 31 May 2017 19:52:22 -0400</pubDate>
       
       <guid>https://mjstealey.github.io/swagger-demo/exposures/</guid>
-      <description>Example of how the Exposures API took shape using Swagger.
+      <description>Short walkthrough example of how the Exposures API was implemented using swagger tools in Python.
 Specification in Swagger At the start we had a notion of the data we wanted to serve, a list of sources to get it from, and a good idea of what this data looked like with some example datasets in a PostgreSQL / PostGIS database. Based on this information a specification file was started prior to the existence of any ReSTful service provider, so going down the rabbit hole of the swagger eco-system seemed a sensible thing to do.</description>
     </item>
     

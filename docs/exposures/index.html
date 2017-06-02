@@ -421,7 +421,7 @@
 
 
 
-<p>Example of how the Exposures API took shape using Swagger.</p>
+<p>Short walkthrough example of how the Exposures API was implemented using swagger tools in Python.</p>
 
 <h3 id="specification-in-swagger">Specification in Swagger</h3>
 
@@ -485,6 +485,132 @@ paths:
 
 <p>And when you run the code as described you get <a href="https://mjstealey.github.io/swagger-demo/
 /pythonserver">this</a>.</p>
+
+<p><strong>database</strong></p>
+
+<p>We had a pre-existing PostgreSQL/PostGIS database that we were making use of, so there was the need to generate the appropriate models for use by our API server.</p>
+
+<p>The initial models.py file was generated using <a href="https://pypi.python.org/pypi/sqlacodegen">sqlacodegen</a></p>
+
+<p>Need to add import statement to <code>sqlacodegen/codegen.py</code>in order to account for <a href="https://geoalchemy-2.readthedocs.io/en/latest/">geoalchemy2</a></p>
+
+<pre><code class="language-python">from sqlalchemy.types import Boolean, String
+import sqlalchemy
+from geoalchemy2 import Geometry, Geography # &lt;-- this
+</code></pre>
+
+<pre><code class="language-console">$ sqlacodegen --outfile models.py postgres://datatrans:somepassword@192.168.56.101:5432/bdtgreen
+</code></pre>
+
+<p><strong>https</strong></p>
+
+<p>Even if we weren&rsquo;t starting with formal authentication and authorization, we at minimum wanted to enable https for all of our services. The documentation for how to do this is straight forward enough for PostgreSQL, but when it came to doing this for the <strong>swagger recommended</strong> connexion package, this is what we found&hellip;</p>
+
+<p><img src="https://mjstealey.github.io/swagger-demo/
+/images/connexion.png" alt="Connexion readthedocs" /></p>
+
+<p>After some package reconnaissance we turned up a way to enable https using native <a href="http://www.gevent.org/gevent.server.html">gevent</a> features which is an option in the connexion package. This involved a couple extra parameters and <a href="https://en.wikipedia.org/wiki/Monkey_patch">monkey patching</a>.</p>
+
+<p><code>app.py</code>:</p>
+
+<pre><code class="language-python">#!/usr/bin/env python3
+
+import connexion
+from configparser import ConfigParser
+from flask_cors import CORS
+from gevent import monkey     # &lt;-- this
+monkey.patch_all()            # &lt;-- this
+
+if __name__ == '__main__':
+    parser = ConfigParser()
+    parser.read('ini/connexion.ini')
+    app = connexion.App(__name__, specification_dir='./swagger/', server=parser.get('connexion', 'server'))
+    app.add_api('swagger.yaml', arguments={'title': 'Environmental Exposures API'})
+    if not parser.get('connexion', 'certfile') or not parser.get('connexion', 'keyfile'):
+        app.run(port=int(parser.get('connexion', 'port')),
+                debug=parser.get('connexion', 'debug'))
+    else:
+        CORS(app.app)
+        app.run(port=int(parser.get('connexion', 'port')),
+                debug=parser.get('connexion', 'debug'),
+                keyfile=parser.get('connexion', 'keyfile'),   # &lt;-- this
+                certfile=parser.get('connexion', 'certfile')  # &lt;-- and this
+                )
+</code></pre>
+
+<p>As with most things our Exposures API is ever evolving and still requires much optimizing with respect to database queries to be more efficient / timely.</p>
+
+<p><strong>Docker</strong></p>
+
+<p>Finally we packaged everything up to be Docker distributable so that deployment could be made rapidly across multiple endpoints as needed to satisfy a reverse proxy load balancer.</p>
+
+<p>The Environmental Exposures API is available in docker as <a href="https://hub.docker.com/r/mjstealey/exposures_api/">mjstealey/exposures_api</a>. There is an assumption that it will be used to connect to a PostgreSQL/PostGIS database pre-populated with the appropriate environmental exposures data tables.</p>
+
+<p>Usage examples will be given in the context of the sample database included in this repository.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-console">$ docker pull mjstealey/exposures_api
+$ docker run -d \
+	--name api-server \
+	-e POSTGRES_HOST=backend.postgres.server \
+	-e POSTGRES_PORT=5432 \
+	-e POSTGRES_DATABASE=bdtgreen \
+	-e POSTGRES_USERNAME=datatrans \
+	-e POSTGRES_PASSWORD=somepassword \
+	-p 5000:5000 \
+	mjstealey/exposures_api
+</code></pre>
+
+<p>Once completed the exposures_api would be running at <a href="http://localhost:5000/v1/ui/#/">http://localhost:5000/v1/ui/#/</a></p>
+
+<p>The <strong>exposure_api</strong> uses environment variables to set itself up, and these can be passed in either individually, or by use of an environment file.</p>
+
+<p>Example environment file (exposures-api.env) with default values</p>
+
+<pre><code class="language-ini">CONNEXION_SERVER=
+CONNEXION_DEBUG=True
+API_SERVER_HOST=localhost
+API_SERVER_PORT=5000
+API_SERVER_KEYFILE=
+API_SERVER_CERTFILE=
+POSTGRES_HOST=backend
+POSTGRES_PORT=5432
+POSTGRES_DATABASE=bdtgreen
+POSTGRES_USERNAME=datatrans
+POSTGRES_PASSWORD=somepassword
+POSTGRES_IP=
+</code></pre>
+
+<p>The user can define the <code>CONNEXION_SERVER</code> to be <strong>blank</strong>, <strong>gevent</strong>, or <strong>tornado</strong>. In our case we&rsquo;ll use <strong>gevent</strong>.</p>
+
+<p>The user can also deploy using SSL certificates, as would likely be found in a prodution deployment.</p>
+
+<p>Example (exposures-api.env):</p>
+
+<pre><code class="language-ini">CONNEXION_SERVER=gevent
+CONNEXION_DEBUG=False
+API_SERVER_HOST=my.api-server.org
+API_SERVER_PORT=443
+API_SERVER_KEYFILE=/certs/server.key
+API_SERVER_CERTFILE=/certs/server.crt
+POSTGRES_HOST=backend.postgres.server
+POSTGRES_PORT=5432
+POSTGRES_DATABASE=bdtgreen
+POSTGRES_USERNAME=datatrans
+POSTGRES_PASSWORD=somepassword
+POSTGRES_IP=
+</code></pre>
+
+<pre><code class="language-console">$ docker run -d \
+	--name api-server \
+	--env-file=exposures-api.env \
+	-v /home/docker/certs:/certs  \
+	-p 443:443 \
+	mjstealey/exposures_api
+</code></pre>
+
+<p>Once completed the exposures_api would be running at <a href="https://my.api-server.org/v1/ui/#/">https://my.api-server.org/v1/ui/#/</a></p>
 
 <h3 id="python-client">Python Client</h3>
 

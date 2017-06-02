@@ -2,7 +2,7 @@
 
 **WORK IN PROGRESS**
 
-Brief tutorial on swagger, swaggerhub, generating clients and other miscellany
+Brief tutorial on swagger, swaggerhub, smartAPI, generating clients and other miscellany
 
 ### Usage
 
